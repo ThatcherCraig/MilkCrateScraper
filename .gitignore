@@ -1,2 +1,5 @@
 finaldata.txt
 .DS_Store
+tickers.txt
+marketopen.txt
+marketclose.txt
