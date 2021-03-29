@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/tshatcher/public_html/
+    - export DEPLOYPATH=/home/thatcher/public_html/
     - /bin/cp index.html $DEPLOYPATH
