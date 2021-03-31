@@ -66,7 +66,7 @@ text{
 </style>
 <body>
 <h1> r/wallstreetbets Top 5 Most Discussed Stocks of the Day on """ + date[5:7] + "/" + date[8:10] + "/"  + date[0:4] + """:</h1>
-<text>This website updates daily at 4:30pm and displays the top 5 most mentioned
+<text>This website updates daily at 4:02pm and displays the top 5 most mentioned
 stocks from the Daily Discussion thread of the wallstreetbets subreddit.
 The goal of this website is to track the overall growth of this subreddit and
 visualize the impact the dicussions have on the stock market.
