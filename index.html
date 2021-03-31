@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-<!-- meta tags, links to css, etc. -->
-<title>Reddit Scrape</title>
-</head>
+<head></head>
+<style>
+h1{
+  text-align: center;
+  font-size: 45px;
+}
+h2{
+  color: red;
+  font-size: 35px;
+}
+p{
+  font-size: 20px;
+}
+text{
+  font-size: 25px
+  text-align: center;
+}
+</style>
 <body>
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-<!-- visible content goes here -->
-  <h3 style="color:red;"> This data is updated at 4:30pm M-F</h3>
-  <object width="1000" height="1000" data="finaldata.txt"></object>
-
-<!-- links to javascripts -->
+<h1> r/wallstreetbets Top 5 Most Discussed Stocks of the Day:</h1>
+<p>This website updates daily at 4:30pm and displays the top 5 most mentioned
+stocks from the Daily Discussion thread of the wallstreetbets subreddit.
+The goal of this website is to track the overall growth of this subreddit and
+visualize the impact the dicussions on this subreddit have on the stock market.
+Every day the total number of comments parsed through will be graphed to demonstrate
+the growth in popularity of this subreddit as a primary way of communicating about
+different stocks. Also, the net change in price of all 5 of the top mentioned
+stocks will be recorded and graphed daily.</p>
+<div id = "ticker1">
+    <h2>GME</h2>
+    <p>As of 2021-03-31 at 9:15am in the wallstreetbets Discussion Post GME had 179 mentions in 1146 comments. At market open GME was valued at: $196.16 at market close GME was valued at: $180.94</p>
+</div>
+<div id = "ticker2">
+    <h2>AMC</h2>
+    <p>As of 2021-03-31 at 9:15am in the wallstreetbets Discussion Post AMC had 37 mentions in 1146 comments. At market open AMC was valued at: $11.4 at market close AMC was valued at: $10.66</p>
+</div>
+<div id = "ticker3">
+    <h2>RKT</h2>
+    <p>As of 2021-03-31 at 9:15am in the wallstreetbets Discussion Post RKT had 18 mentions in 1146 comments. At market open RKT was valued at: $23.14 at market close RKT was valued at: $23.02</p>
+</div>
+<div id = "ticker4">
+    <h2>PLTR</h2>
+    <p>As of 2021-03-31 at 9:15am in the wallstreetbets Discussion Post PLTR had 16 mentions in 1146 comments. At market open PLTR was valued at: $23.93 at market close PLTR was valued at: $23.25</p>
+</div>
+<div id = "ticker5">
+    <h2>TSLA</h2>
+    <p>As of 2021-03-31 at 9:15am in the wallstreetbets Discussion Post TSLA had 11 mentions in 1146 comments. At market open TSLA was valued at: $674.19 at market close TSLA was valued at: $662.16</p>
+</div>
 </body>
 </html>
