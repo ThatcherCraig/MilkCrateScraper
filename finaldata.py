@@ -69,7 +69,7 @@ text{
 <text>This website updates daily at 4:30pm and displays the top 5 most mentioned
 stocks from the Daily Discussion thread of the wallstreetbets subreddit.
 The goal of this website is to track the overall growth of this subreddit and
-visualize the impact the dicussions on this subreddit have on the stock market.
+visualize the impact the dicussions have on the stock market.
 Every day the total number of comments parsed through will be graphed to demonstrate
 the growth in popularity of this subreddit as a primary way of communicating about
 different stocks. Also, the net change in price of all 5 of the top mentioned
