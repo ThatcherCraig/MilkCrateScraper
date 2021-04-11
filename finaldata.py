@@ -1,4 +1,6 @@
 import datetime
+from matplotlib import pyplot as plt
+import numpy as np
 input = open("marketopen.txt", "r")
 toptickers = []
 tickermentions = []
@@ -40,6 +42,37 @@ else:
 percentchange = []
 for i in range(len(netchange)):
     percentchange.append(((float(closeprice[i]) - float(openprice[i])) / float(openprice[i])) * 100)
+cdata = open('commentdata.txt','r')
+Lines = cdata.readlines()
+commentdata = []
+for line in Lines:
+    data = line.strip().split()
+    commentdata.append(float(data[0]))
+cdata.close()
+ddata = open('datedata.txt','r')
+Lines = ddata.readlines()
+datedata = []
+for line in Lines:
+    data = line.strip().split()
+    prettydate = data[0]
+    datedata.append(prettydate[5:7] + "/" + prettydate[8:10] + "/"  + prettydate[0:4])
+ddata.close()
+plt.figure()
+plt.title('Total # of Daily Comments')
+plt.ylabel('# of comments')
+plt.xlabel('Date')
+#for scatter I need to find out how to cover range of min and max of commentdata as y-axis values
+#and then i can just plot each value associated with # of comments
+# make up some data
+plt.scatter(datedata,commentdata)
+plt.plot(datedata,commentdata)
+plt.gcf().autofmt_xdate()
+plt.savefig('commentsgraph.png')
+#Scatter Plot may help additional visualization
+
+#ok whenever i figure out how to graph this data correctly I think the strat to get this in html form
+#is to output graph as csv if thats a thing I can do with matplotlib and then open that same csv file
+#and make it a div in the html file
 f = open('index.html','w')
 html = """<!DOCTYPE html>
 <html>
@@ -76,29 +109,27 @@ different stocks. Also, the net change in price of all 5 of the top mentioned
 stocks will be recorded and graphed daily.</text>
 <div id = "ticker1">
     <h2>1. """ + toptickers[0] + """</h2>
-    <p>As of 9:15am """ + toptickers[0] + """ had """ + str(tickermentions[0]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[0] + """ was valued at: $""" + str(openprice[0]) + """ at market close """ + toptickers[0] + """ was valued at: $""" + str(closeprice[0]) + """. The total change in price throughout the day was: $""" + str(round(netchange[0],2)) + """ this is a """ + str(round(percentchange[0],2)) + """% change in price throughout the day.</p>
+    <p>As of 9:15am """ + toptickers[0] + """ had """ + str(tickermentions[0]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[0] + """ was valued at: $""" + str(openprice[0]) + """ and at market close """ + toptickers[0] + """ was valued at: $""" + str(closeprice[0]) + """. The total change in price throughout the day was: $""" + str(round(netchange[0],2)) + """ this is a """ + str(round(percentchange[0],2)) + """% change in price throughout the day.</p>
 </div>
 <div id = "ticker2">
     <h2>2. """ + toptickers[1] + """</h2>
-    <p>As of 9:15am """ + toptickers[1] + """ had """ + str(tickermentions[1]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[1] + """ was valued at: $""" + str(openprice[1]) + """ at market close """ + toptickers[1] + """ was valued at: $""" + str(closeprice[1]) + """. The total change in price throughout the day was: $""" + str(round(netchange[1],2)) + """ this is a """ + str(round(percentchange[1],2)) + """% change in price throughout the day.</p>
+    <p>As of 9:15am """ + toptickers[1] + """ had """ + str(tickermentions[1]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[1] + """ was valued at: $""" + str(openprice[1]) + """ and at market close """ + toptickers[1] + """ was valued at: $""" + str(closeprice[1]) + """. The total change in price throughout the day was: $""" + str(round(netchange[1],2)) + """ this is a """ + str(round(percentchange[1],2)) + """% change in price throughout the day.</p>
 </div>
 <div id = "ticker3">
     <h2>3. """ + toptickers[2] + """</h2>
-    <p>As of 9:15am """ + toptickers[2] + """ had """ + str(tickermentions[2]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[2] + """ was valued at: $""" + str(openprice[2]) + """ at market close """ + toptickers[2] + """ was valued at: $""" + str(closeprice[2]) + """. The total change in price throughout the day was: $""" + str(round(netchange[2],2)) + """ this is a """ + str(round(percentchange[2],2)) + """% change in price throughout the day.</p>
+    <p>As of 9:15am """ + toptickers[2] + """ had """ + str(tickermentions[2]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[2] + """ was valued at: $""" + str(openprice[2]) + """ and at market close """ + toptickers[2] + """ was valued at: $""" + str(closeprice[2]) + """. The total change in price throughout the day was: $""" + str(round(netchange[2],2)) + """ this is a """ + str(round(percentchange[2],2)) + """% change in price throughout the day.</p>
 </div>
 <div id = "ticker4">
     <h2>4. """ + toptickers[3] + """</h2>
-    <p>As of 9:15am """ + toptickers[3] + """ had """ + str(tickermentions[3]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[3] + """ was valued at: $""" + str(openprice[3]) + """ at market close """ + toptickers[3] + """ was valued at: $""" + str(closeprice[3]) + """. The total change in price throughout the day was: $""" + str(round(netchange[3],2)) + """ this is a """ + str(round(percentchange[3],2)) + """% change in price throughout the day.</p>
+    <p>As of 9:15am """ + toptickers[3] + """ had """ + str(tickermentions[3]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[3] + """ was valued at: $""" + str(openprice[3]) + """ and at market close """ + toptickers[3] + """ was valued at: $""" + str(closeprice[3]) + """. The total change in price throughout the day was: $""" + str(round(netchange[3],2)) + """ this is a """ + str(round(percentchange[3],2)) + """% change in price throughout the day.</p>
 </div>
 <div id = "ticker5">
     <h2>5. """ + toptickers[4] + """</h2>
-    <p>As of 9:15am """ + toptickers[4] + """ had """ + str(tickermentions[4]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[4] + """ was valued at: $""" + str(openprice[4]) + """ at market close """ + toptickers[4] + """ was valued at: $""" + str(closeprice[4]) + """. The total change in price throughout the day was: $""" + str(round(netchange[4],2)) + """ this is a """ + str(round(percentchange[4],2)) + """% change in price throughout the day.</p>
+    <p>As of 9:15am """ + toptickers[4] + """ had """ + str(tickermentions[4]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[4] + """ was valued at: $""" + str(openprice[4]) + """ and at market close """ + toptickers[4] + """ was valued at: $""" + str(closeprice[4]) + """. The total change in price throughout the day was: $""" + str(round(netchange[4],2)) + """ this is a """ + str(round(percentchange[4],2)) + """% change in price throughout the day.</p>
 </div>
-<h3>Net profit of all 5 stocks: <span style="color:""" + redgreen + """">""" + "$" + str(round(sum(netchange),2)) + """</span></h3>
+<h3>Net profit of all 5 stocks: $<span style="color:""" + redgreen + """">""" + str(round(sum(netchange),2)) + """</span></h3>
+<img src='commentsgraph.png'>
 </body>
 </html>"""
 f.write(html)
 f.close()
-
-#email t&i about davidson domains
-#sequel light database
