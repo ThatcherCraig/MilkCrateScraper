@@ -35,13 +35,17 @@ for i in range(len(toptickers)):
 output.write("Total increase in top mentioned stocks: $" + str(round(sum(netchange),2)) + "\n")
 output.write("------------------------------------------------------------------------------------------" + "\n")
 output.close()
-if(round(sum(netchange),2) > 0):
-    redgreen = "green"
+if(round(sum(netchange),2) >= 0):
+    redgreen1 = "green"
 else:
-    redgreen = "red"
+    redgreen1 = "red"
 percentchange = []
 for i in range(len(netchange)):
     percentchange.append(((float(closeprice[i]) - float(openprice[i])) / float(openprice[i])) * 100)
+if(round(sum(percentchange),2) >= 0):
+    redgreen2 = "green"
+else:
+    redgreen2 = "red"
 cdata = open('commentdata.txt','r')
 Lines = cdata.readlines()
 commentdata = []
@@ -57,22 +61,25 @@ for line in Lines:
     prettydate = data[0]
     datedata.append(prettydate[5:7] + "/" + prettydate[8:10] + "/"  + prettydate[0:4])
 ddata.close()
+if(commentdata[len(commentdata)-1] >= commentdata[len(commentdata)-2]):
+    redgreen3 = "green"
+else:
+    redgreen3 = "red"
 plt.figure()
 plt.title('Total # of Daily Comments')
 plt.ylabel('# of comments')
 plt.xlabel('Date')
-#for scatter I need to find out how to cover range of min and max of commentdata as y-axis values
-#and then i can just plot each value associated with # of comments
-# make up some data
-plt.scatter(datedata,commentdata)
-plt.plot(datedata,commentdata)
+plt.bar(datedata,commentdata,color=redgreen3)
 plt.gcf().autofmt_xdate()
-plt.savefig('commentsgraph.png')
-#Scatter Plot may help additional visualization
+plt.savefig("commentsgraph.png")
+plt.show()
+#next graph I could add is a bar graph that shows price change of previous days
+#with this graph I could pull price change of nasdaq daily...
+#what other graphics would show importance of data
+#csv
+#grid based design -> get feedback
+#google new york times data stories
 
-#ok whenever i figure out how to graph this data correctly I think the strat to get this in html form
-#is to output graph as csv if thats a thing I can do with matplotlib and then open that same csv file
-#and make it a div in the html file
 f = open('index.html','w')
 html = """<!DOCTYPE html>
 <html>
@@ -127,7 +134,8 @@ stocks will be recorded and graphed daily.</text>
     <h2>5. """ + toptickers[4] + """</h2>
     <p>As of 9:15am """ + toptickers[4] + """ had """ + str(tickermentions[4]) + """ mentions in """ + str(comments) + """ comments. At market open """ + toptickers[4] + """ was valued at: $""" + str(openprice[4]) + """ and at market close """ + toptickers[4] + """ was valued at: $""" + str(closeprice[4]) + """. The total change in price throughout the day was: $""" + str(round(netchange[4],2)) + """ this is a """ + str(round(percentchange[4],2)) + """% change in price throughout the day.</p>
 </div>
-<h3>Net profit of all 5 stocks: $<span style="color:""" + redgreen + """">""" + str(round(sum(netchange),2)) + """</span></h3>
+<h3>Net profit of all 5 stocks: $<span style="color:""" + redgreen1 + """">""" + str(round(sum(netchange),2)) + """</span></h3>
+<h3>Net percent change of all 5 stocks: <span style="color:""" + redgreen2 + """">""" + str(round(sum(percentchange),2)) + """%</span></h3>
 <img src='commentsgraph.png'>
 </body>
 </html>"""
