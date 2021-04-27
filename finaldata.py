@@ -1,4 +1,5 @@
 import datetime
+from yahoo_fin import stock_info as si
 from matplotlib import pyplot as plt
 import numpy as np
 input = open("marketopen.txt", "r")
@@ -65,21 +66,74 @@ if(commentdata[len(commentdata)-1] >= commentdata[len(commentdata)-2]):
     redgreen3 = "green"
 else:
     redgreen3 = "red"
-plt.figure()
+netdata = open('netchangedata.txt','a+')
+netdata.write(str(round(sum(percentchange),2)) + "\n")
+netdata.close()
+netchangedata = open('netchangedata.txt','r')
+Lines = netchangedata.readlines()
+percentchangedata = []
+for line in Lines:
+    data = line.strip().split()
+    percentchangedata.append(float(data[0]))
+netchangedata.close()
+
+nasdaqdata = open('nasdaqdata.txt','r')
+Lines = nasdaqdata.readlines()
+nasdaqchangedata = []
+for line in Lines:
+    data = line.strip().split()
+    nasdaqpercchange = ((float(data[1]) - float(data[0])) / float(data[0])) * 100
+    nasdaqchangedata.append(nasdaqpercchange)
+netchangedata.close()
+
+plt.figure(1)
 plt.title('Total # of Daily Comments')
-plt.ylabel('# of comments')
+plt.ylabel('# of Comments')
 plt.xlabel('Date')
-plt.bar(datedata,commentdata,color=redgreen3)
+plt.bar(datedata,commentdata,width=1,edgecolor = "black",color=redgreen3)
 plt.gcf().autofmt_xdate()
 plt.savefig("commentsgraph.png")
 plt.show()
-#next graph I could add is a bar graph that shows price change of previous days
-#with this graph I could pull price change of nasdaq daily...
-#what other graphics would show importance of data
-#csv
-#grid based design -> get feedback
-#google new york times data stories
 
+plt.figure(2)
+plt.title('Total % change of Top 5 Most Mentioned Stocks over time')
+plt.ylabel('% Change')
+plt.xlabel('Date')
+negative_data = []
+positive_data = []
+for i in range(len(percentchangedata)):
+    if(percentchangedata[i] > 0):
+        positive_data.append(percentchangedata[i])
+        negative_data.append(0)
+    else:
+        negative_data.append(percentchangedata[i])
+        positive_data.append(0)
+ax = plt.subplot(111)
+ax.bar(datedata, negative_data,width=.85,edgecolor = "black",color='red')
+ax.bar(datedata, positive_data,width=.85,edgecolor = "black",color='green')
+plt.gcf().autofmt_xdate()
+plt.savefig("netchangegraph.png")
+plt.show()
+
+plt.figure(3)
+plt.title('Total % change of NASDAQ over time')
+plt.ylabel('% Change')
+plt.xlabel('Date')
+negative_data = []
+positive_data = []
+for i in range(len(nasdaqchangedata)):
+    if(nasdaqchangedata[i] > 0):
+        positive_data.append(nasdaqchangedata[i])
+        negative_data.append(0)
+    else:
+        negative_data.append(nasdaqchangedata[i])
+        positive_data.append(0)
+ax = plt.subplot(111)
+ax.bar(datedata, negative_data,width=.85,edgecolor = "black",color='red')
+ax.bar(datedata, positive_data,width=.85,edgecolor = "black",color='green')
+plt.gcf().autofmt_xdate()
+plt.savefig("nasdaqchangegraph.png")
+plt.show()
 f = open('index.html','w')
 html = """<!DOCTYPE html>
 <html>
@@ -137,6 +191,8 @@ stocks will be recorded and graphed daily.</text>
 <h3>Net profit of all 5 stocks: $<span style="color:""" + redgreen1 + """">""" + str(round(sum(netchange),2)) + """</span></h3>
 <h3>Net percent change of all 5 stocks: <span style="color:""" + redgreen2 + """">""" + str(round(sum(percentchange),2)) + """%</span></h3>
 <img src='commentsgraph.png'>
+<img src='netchangegraph.png'>
+<img src='nasdaqchangegraph.png'>
 </body>
 </html>"""
 f.write(html)

@@ -2,4 +2,8 @@ MVIS 285 mentions in 1240 comments
 GME 84 mentions in 1240 comments
 PM 26 mentions in 1240 comments
 TSLA 24 mentions in 1240 comments
+<<<<<<< HEAD
 AMD 18 mentions in 1240 comments
+=======
+AMD 18 mentions in 1240 comments
+>>>>>>> 7a3d7f47f87af97a303fe2264c4bfb1f874e2011

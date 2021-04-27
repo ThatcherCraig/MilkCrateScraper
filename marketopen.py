@@ -17,3 +17,7 @@ for i in range(len(toptickers)):
         curr_price = round(si.get_live_price(toptickers[i]),2)
         output.write(str(toptickers[i]) + " " + str(tickermentions[i]) + " " + str(comments) + " " + str(curr_price) + "\n")
 output.close()
+nasdaqdata = open('nasdaqdata.txt','a+')
+nasdaqprice = round(si.get_live_price('^IXIC'),2)
+nasdaqdata.write(str(nasdaqprice) + " ")
+nasdaqdata.close()

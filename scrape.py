@@ -44,9 +44,9 @@ for i in range(len(highest_freq)):
 #output.write("\n" + "This data was collected on: " + str(datetime.datetime.now()) + "\n")
 output.close()
 commentdata = open("commentdata.txt", "a+")
-commentdata.write(str(comment_count))
+commentdata.write("\n" + str(comment_count))
 commentdata.close()
 datedata = open("datedata.txt", "a+")
-datedata.write(str(datetime.datetime.now()))
+datedata.write("\n" + str(datetime.datetime.now()))
 datedata.close()
 #cron alert config
