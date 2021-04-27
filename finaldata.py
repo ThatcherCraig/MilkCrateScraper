@@ -1,4 +1,5 @@
 import datetime
+from yahoo_fin import stock_info as si
 from matplotlib import pyplot as plt
 import numpy as np
 input = open("marketopen.txt", "r")
@@ -75,6 +76,16 @@ for line in Lines:
     data = line.strip().split()
     percentchangedata.append(float(data[0]))
 netchangedata.close()
+
+nasdaqdata = open('nasdaqdata.txt','r')
+Lines = nasdaqdata.readlines()
+nasdaqchangedata = []
+for line in Lines:
+    data = line.strip().split()
+    nasdaqpercchange = ((float(data[1]) - float(data[0])) / float(data[0])) * 100
+    nasdaqchangedata.append(nasdaqpercchange)
+netchangedata.close()
+
 plt.figure(1)
 plt.title('Total # of Daily Comments')
 plt.ylabel('# of Comments')
@@ -83,8 +94,9 @@ plt.bar(datedata,commentdata,width=1,edgecolor = "black",color=redgreen3)
 plt.gcf().autofmt_xdate()
 plt.savefig("commentsgraph.png")
 plt.show()
+
 plt.figure(2)
-plt.title('Total % change of Top 5 Most Mentioned Stocks')
+plt.title('Total % change of Top 5 Most Mentioned Stocks over time')
 plt.ylabel('% Change')
 plt.xlabel('Date')
 negative_data = []
@@ -101,6 +113,26 @@ ax.bar(datedata, negative_data,width=.85,edgecolor = "black",color='red')
 ax.bar(datedata, positive_data,width=.85,edgecolor = "black",color='green')
 plt.gcf().autofmt_xdate()
 plt.savefig("netchangegraph.png")
+plt.show()
+
+plt.figure(3)
+plt.title('Total % change of NASDAQ over time')
+plt.ylabel('% Change')
+plt.xlabel('Date')
+negative_data = []
+positive_data = []
+for i in range(len(nasdaqchangedata)):
+    if(nasdaqchangedata[i] > 0):
+        positive_data.append(nasdaqchangedata[i])
+        negative_data.append(0)
+    else:
+        negative_data.append(nasdaqchangedata[i])
+        positive_data.append(0)
+ax = plt.subplot(111)
+ax.bar(datedata, negative_data,width=.85,edgecolor = "black",color='red')
+ax.bar(datedata, positive_data,width=.85,edgecolor = "black",color='green')
+plt.gcf().autofmt_xdate()
+plt.savefig("nasdaqchangegraph.png")
 plt.show()
 f = open('index.html','w')
 html = """<!DOCTYPE html>
@@ -160,6 +192,7 @@ stocks will be recorded and graphed daily.</text>
 <h3>Net percent change of all 5 stocks: <span style="color:""" + redgreen2 + """">""" + str(round(sum(percentchange),2)) + """%</span></h3>
 <img src='commentsgraph.png'>
 <img src='netchangegraph.png'>
+<img src='nasdaqchangegraph.png'>
 </body>
 </html>"""
 f.write(html)
