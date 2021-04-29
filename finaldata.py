@@ -14,6 +14,21 @@ for line in Lines:
     comments = data[2]
     openprice.append(data[3])
 input.close()
+output = open("finaldata.txt","a+")
+date = str(datetime.datetime.now())
+output.write("Taken from wallstreetbets subreddit Daily Discussion Thread on " + date[0:10] + "\n" + "\n")
+netchange = []
+for i in range(len(toptickers)):
+    if(i == 5):
+        break
+    else:
+        output.write(str(toptickers[i]) + " - " + str(tickermentions[i]) + " mentions in " + str(comments) + " comments." + "\n")
+        totalchange = float(closeprice[i]) - float(openprice[i])
+        netchange.append(totalchange)
+        output.write(str(toptickers[i]) + "s price data on market open: $" + str(openprice[i]) + " and $" + str(closeprice[i]) + " on market close. Total Change: " + str(round(totalchange,2)) + "\n\n")
+output.write("Total increase in top mentioned stocks: $" + str(round(sum(netchange),2)) + "\n")
+output.write("------------------------------------------------------------------------------------------" + "\n")
+output.close()
 input2 = open("marketclose.txt", "r")
 closeprice = []
 Lines = input2.readlines()
@@ -67,6 +82,7 @@ if(commentdata[len(commentdata)-1] >= commentdata[len(commentdata)-2]):
 else:
     redgreen3 = "red"
 netdata = open('netchangedata.txt','a+')
+print(percentchange)
 netdata.write(str(round(sum(percentchange),2)) + "\n")
 netdata.close()
 netchangedata = open('netchangedata.txt','r')
@@ -134,6 +150,13 @@ ax.bar(datedata, positive_data,width=.85,edgecolor = "black",color='green')
 plt.gcf().autofmt_xdate()
 plt.savefig("nasdaqchangegraph.png")
 plt.show()
+plt.figure(4)
+plt.title('Total % change of Top 5 mentioned stocks')
+plt.ylabel('% Change')
+plt.xlabel('Most mentioned tickers from left to right')
+plt.bar(toptickers,percentchange,width=1,edgecolor = "black",color="blue")
+plt.savefig("tickerpricechanges.png")
+plt.show()
 f = open('index.html','w')
 html = """<!DOCTYPE html>
 <html>
@@ -144,7 +167,7 @@ h1{
   font-size: 45px;
 }
 h2{
-  color: red;
+  color: blue;
   font-size: 35px;
 }
 h3{
@@ -193,6 +216,7 @@ stocks will be recorded and graphed daily.</text>
 <img src='commentsgraph.png'>
 <img src='netchangegraph.png'>
 <img src='nasdaqchangegraph.png'>
+<img src='tickerpricechanges.png'>
 </body>
 </html>"""
 f.write(html)
