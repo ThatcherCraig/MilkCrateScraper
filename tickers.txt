@@ -1,5 +1,5 @@
-CLOV 100 mentions in 1001 comments
-NOK 100 mentions in 1001 comments
-MVIS 73 mentions in 1001 comments
-AMZN 21 mentions in 1001 comments
-AAPL 20 mentions in 1001 comments
+TLRY 59 mentions in 1431 comments
+PLTR 51 mentions in 1431 comments
+NOK 34 mentions in 1431 comments
+TSLA 21 mentions in 1431 comments
+RKT 21 mentions in 1431 comments

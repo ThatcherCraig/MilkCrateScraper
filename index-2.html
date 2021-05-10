@@ -1,0 +1,136 @@
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+body{
+    background-color: rgb(60,79,118);
+}
+h1{
+  text-align: center;
+  font-size: 45px;
+  color: white;
+}
+h2{
+  color: blue;
+  font-size: 35px;
+}
+h3{
+  font-size:30px;
+}
+p{
+  font-size: 20px;
+}
+text{
+  font-size: 20px;
+  text-align: center;
+}
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content{
+  height: 100%;
+  margin-bottom: -20px;
+}
+.row.title{
+  background-color: rgb(60,79,118);
+  height: auto;
+}
+.row-height {
+    height: auto;
+}
+.col-md-3{
+  height: 100%;
+  background-color: rgb(60,79,118);
+}
+.col-12{
+  height: 100%;
+  background-color: rgb(221,219,241);
+}
+.col-xs-12{
+  height: auto;
+  background-color: rgb(221,219,241);
+}
+img {
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+button{
+  background-color: rgb(221,219,241);
+  color: rgb(60,79,118);
+  font-size: 20px;
+}
+    /* On small screens, set height to 'auto' for sidenav and grid */
+
+</style>
+<script>
+function aboutPage() {
+  alert("This website updates daily at 4:02pm and displays the top 5 most mentioned stocks from the Daily Discussion thread of the wallstreetbets subreddit. This is accomplished by a python script that works in the background and uses PRAW, a python library made for scraping subreddits. The script parses through every comment in the daily discussion thread and cross references every word in each comment with every stock ticker that is listed on the NASDAQ stock exchange. After that the price of those 5 stocks is collected at market open and market close. The data is then graphed using matplotlib, a python library designed for graphing different data sets. The goal of this website is to track the overall growth of this subreddit and visualize the impact these discussions have on the stock market. Every day the total number of comments parsed through will be graphed to demonstrate the growth in popularity of this subreddit as a primary way of communicating about different stocks. Also, the net percent change of all 5 of the top mentioned stocks will be recorded and graphed daily and compared to a graph of the NASDAQ index\’s daily net percent change. Thus far, daily data from this subreddit has been collected and accurately displayed since 4/26/21. *as an added bonus wallstreetbets is well known for their significant use of expletives so I have added a counter that counts how many swears were used throughout all of the comments parsed through on that day.");
+}
+</script>
+<body>
+
+
+  <div class="container-fluid">
+    <div class="row title">
+    <h1> r/wallstreetbets Top 5 Most Discussed Stocks of the Day on 05/10/2021: <br><br><button onclick="aboutPage()">Project Description</button></h1>
+    </div>
+    <div class="row content">
+      <div class="hidden-sm hidden-xs col-md-3 col-lg-3 col-xl-3">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <h2>1. TLRY</h2>
+      <h5>59 mentions in 1431 comments</h5>
+      <p>As of 9:15am TLRY had 59 mentions in 1431 comments. At market open TLRY was valued at: $15.31 and at market close TLRY was valued at: $16.18. The total change in price throughout the day was: $0.87 this is a 5.68% change in price throughout the day.
+      </p>
+      <img src='ticker1.png'>
+      <br><br>
+      <hr>
+      <h2>2. PLTR</h2>
+      <h5>51 mentions in 1431 comments</h5>
+      <p>As of 9:15am PLTR had 51 mentions in 1431 comments. At market open PLTR was valued at: $20.3 and at market close PLTR was valued at: $19.76. The total change in price throughout the day was: $-0.54 this is a -2.66% change in price throughout the day.
+      </p>
+      <img src='ticker2.png'>
+      <br><br>
+      <hr>
+      <h2>3. NOK</h2>
+      <h5>34 mentions in 1431 comments</h5>
+      <p>As of 9:15am NOK had 34 mentions in 1431 comments. At market open NOK was valued at: $5.0 and at market close TLRY was valued at: $5.09. The total change in price throughout the day was: $0.09 this is a 1.8% change in price throughout the day.
+      </p>
+      <img src='ticker3.png'>
+      <br><br>
+      <hr>
+      <h2>4. TSLA</h2>
+      <h5>21 mentions in 1431 comments</h5>
+      <p>As of 9:15am TSLA had 21 mentions in 1431 comments. At market open TSLA was valued at: $663.54 and at market close TSLA was valued at: $672.37. The total change in price throughout the day was: $8.83 this is a 1.33% change in price throughout the day.
+      </p>
+      <img src='ticker4.png'>
+      <br><br>
+      <hr>
+      <h2>5. RKT</h2>
+      <h5>21 mentions in 1431 comments</h5>
+      <p>As of 9:15am RKT had 21 mentions in 1431 comments. At market open RKT was valued at: $19.19 and at market close RKT was valued at: $18.08. The total change in price throughout the day was: $-1.11 this is a -5.78% change in price throughout the day.
+      </p>
+      <img src='ticker5.png'>
+      <br><br>
+      <hr>
+      <h2>Net change of 5 most mentioned stocks today:</h2>
+      <img src='tickerpricechanges.png'>
+      <h2>Data collected over time:</h2>
+      <p>Total number of comments over time:</p>
+      <img src='commentsgraph.png'>
+      <p>Net change of daily 5 tickers compared to net change of NASDAQ stock exchange over time:</p>
+      <img src='netchangegraph.png'>
+      <img src='nasdaqchangegraph.png'>
+      </div>
+      <div class="hidden-sm hidden-xs col-md-3 col-lg-3 col-xl-3">
+      </div>
+      </div>
+      </div>
+</body>
+</html>
